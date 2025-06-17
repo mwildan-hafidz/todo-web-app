@@ -1,15 +1,26 @@
-// To do:
-// + Buat file simpan menjadi yyyymmdd_hhmmss.json.
-// + Simpan data per sesi.
-
 let dataTugas = [];
 let tugasDipilih = null;
 
-// Tombol tambah.
-const tblTambah = document.querySelector('.tbl-tambah');
-tblTambah.addEventListener('click', function () {
-    const inputTugas = document.getElementById('input-tugas');
+// Memuat data sesi.
+document.addEventListener('DOMContentLoaded', function () {
+    const sessionData = sessionStorage.getItem('dataTugas');
+    if (!sessionData) return;
 
+    dataTugas = JSON.parse(sessionData);
+    updateTugas();
+});
+
+const inputTugas = document.getElementById('input-tugas');
+const tblTambah = document.querySelector('.tbl-tambah');
+
+inputTugas.addEventListener('keypress', function (e) {
+    if (e.key !== 'Enter') return;
+        
+    e.preventDefault();
+    tblTambah.click();
+});
+
+tblTambah.addEventListener('click', function () {
     if (inputTugas.value == '') return;
     
     dataTugas.push({
@@ -62,16 +73,18 @@ tblSimpan.addEventListener('click', function () {
 
     const a = document.createElement('a');
     a.href = URL.createObjectURL(file);
-    a.download = 'save.json';
+    a.download = `${getTanggal()}.json`;
     a.click();
-})
+});
 
 // Functions.
 
 const containerTugas = document.querySelector('.container-tugas');
 
 function updateTugas() {
+    saveToSession();
     resetTugas();
+    
     dataTugas.forEach(function (tugas, index) {
         containerTugas.innerHTML += 
         `<li class="tugas ${tugas.cek ? 'cek' : ''}" data-index="${index}">
@@ -100,4 +113,27 @@ function showModal() {
 
 function hideModal() {
     modal.style.display = 'none';
+}
+
+function getTanggal() {
+    function pad(n) {
+        return n.toString().padStart(2, '0');
+    }
+    
+    const tgl = new Date();
+
+    let tglString = '';
+    tglString += `${tgl.getFullYear()}`;
+    tglString += `${pad(tgl.getMonth() + 1)}`;
+    tglString += `${pad(tgl.getDate())}`;
+    tglString += '_';
+    tglString += `${pad(tgl.getHours())}`;
+    tglString += `${pad(tgl.getMinutes())}`;
+    tglString += `${pad(tgl.getSeconds())}`;
+
+    return tglString;
+}
+
+function saveToSession() {
+    sessionStorage.setItem('dataTugas', JSON.stringify(dataTugas));
 }
