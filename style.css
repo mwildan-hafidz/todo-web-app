@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: normal;
+
+    list-style: none;
+    text-decoration: none;
+    line-height: 100%;
+
+    box-sizing: border-box;
+
+    background: transparent;
+    border: none;
+
+    color: inherit;
+}
+
+/* Header. */
+
+header {
+    background-color: #333;
+    color: #fff;
+    
+    padding: .5rem 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.tbl-simpan {
+    padding: .3rem .5rem;
+    border-radius: .2rem;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.tbl-simpan:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Main. */
+
+main {
+    padding: 1rem;
+}
+
+/* Papan. */
+
+.papan {
+    background-color: #eaeaea;
+
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.papan h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+
+/* Container input. */
+
+.container-input {
+    display: flex;
+}
+
+.container-input .input-tugas {
+    width: 100%;
+    padding: .2rem 1rem;
+
+    /* border: 1px solid black; */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right: none;
+
+    background-color: #fff;
+}
+
+.container-input .tbl-tambah {
+    padding: 0 1rem;
+
+    border: 1px solid black;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    background-color: #333;
+    color: #fff;
+}
+
+.container-input .tbl-tambah:hover {
+    background-color: #555;
+    cursor: pointer;
+}
+
+/* Tugas. */
+
+.tugas {
+    display: flex;
+    align-items: center;
+    margin-top: .5rem;
+}
+
+.tugas div {
+    display: flex;
+}
+
+.tugas .tbl-cek,
+.tugas .tbl-hapus,
+.tugas p {
+    padding: .5rem;
+    background-color: #fff;
+}
+
+.tugas .tbl-cek {
+    border-right: 1px solid black;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.tugas .tbl-cek:hover {
+    background-color: #82f588;
+    /* border-color: #82f588; */
+}
+
+.tugas .tbl-hapus {
+    border-left: 1px solid black;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.tugas .tbl-hapus:hover {
+    background-color: #ff695e;
+    /* border-color: #ff695e; */
+}
+
+.tugas div,
+.tugas p {
+    flex: 1;
+    min-width: 0;
+}
+
+.tugas p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tugas.cek .tbl-cek,
+.tugas.cek p,
+.tugas.cek .tbl-hapus{
+    opacity: .5;
+}
+
+.tugas.cek .tbl-cek:hover,
+.tugas.cek .tbl-hapus:hover{
+    opacity: 1;
+}
+
+.tugas.cek .tbl-cek:hover {
+    background-color: #fffc37;
+}
+
+.tugas.cek p {
+    text-decoration: line-through;
+}
+
+/* Modal. */
+
+.container-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .4);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.modal p {
+    margin-bottom: 10px;
+}
+
+.modal div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal button {
+    margin-left: .5rem;
+    padding: .5rem 1rem;
+    background-color: #fff;
+    border-radius: .2rem;
+    color: #fff;
+}
+
+.modal .tbl-tidak {
+    background-color: #333;
+}
+
+.modal .tbl-lanjut {
+    background-color: #ff695e;
+}
+
+.modal .tbl-tidak:hover,
+.modal .tbl-lanjut:hover {
+    opacity: .8;
+}
