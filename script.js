@@ -1,3 +1,6 @@
+// To do:
+// + Tombol urutkan.
+
 let dataTugas = [];
 let tugasDipilih = null;
 
@@ -5,9 +8,7 @@ let tugasDipilih = null;
 document.addEventListener('DOMContentLoaded', function () {
     const sessionData = sessionStorage.getItem('dataTugas');
     if (!sessionData) return;
-
-    dataTugas = JSON.parse(sessionData);
-    updateTugas();
+    muatData(sessionData);
 });
 
 const inputTugas = document.getElementById('input-tugas');
@@ -43,6 +44,34 @@ document.body.addEventListener('click', function (e) {
         return;
     }
 
+    // Tombol edit.
+    if (e.target.classList.contains('tbl-edit')) {
+        const tugas = e.target.closest('.tugas');
+        const data = dataTugas[tugas.dataset.index];
+        const inputEdit = tugas.querySelector('.input-edit');
+        const p = tugas.querySelector('p');
+        
+        p.style.display = 'none';
+        inputEdit.style.display = 'block';
+        
+        inputEdit.value = `${data.isi}`;
+        inputEdit.focus();
+        
+        inputEdit.onblur = function () {
+            inputEdit.value = '';
+            
+            p.style.display = 'block';
+            inputEdit.style.display = 'none';
+        }
+
+        inputEdit.onkeypress = function (e) {
+            if (e.key !== 'Enter') return;
+
+            data.isi = inputEdit.value;
+            updateTugas();
+        }
+    }
+
     // Tombol hapus.
     if (e.target.classList.contains('tbl-hapus')) {
         tugasDipilih = e.target.closest('.tugas');
@@ -66,7 +95,30 @@ tblTidak.addEventListener('click', function () {
     hideModal();
 });
 
+const inputFile = document.querySelector('#input-file')
+const tblMuat = document.querySelector('.tbl-muat');
 const tblSimpan = document.querySelector('.tbl-simpan');
+
+tblMuat.addEventListener('click', function () {
+    inputFile.click();
+});
+
+inputFile.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        try {
+            muatData(e.target.result);
+        }
+        catch {
+            alert('File tidak valid.');
+        }
+    }
+    reader.readAsText(file)
+})
+
 tblSimpan.addEventListener('click', function () {
     const saveJSON = JSON.stringify(dataTugas);
     const file = new Blob([saveJSON], {type: 'text/plain'});
@@ -88,10 +140,10 @@ function updateTugas() {
     dataTugas.forEach(function (tugas, index) {
         containerTugas.innerHTML += 
         `<li class="tugas ${tugas.cek ? 'cek' : ''}" data-index="${index}">
-            <div>
-                <button class="tbl-cek">Cek</button>
-                <p>${tugas.isi}</p>
-            </div>
+            <button class="tbl-cek">Cek</button>
+            <p>${tugas.isi}</p>
+            <input type="text" class="input-edit" style="display: none;">
+            <button class="tbl-edit">Edit</button>
             <button class="tbl-hapus">Hapus</button>
         </li>`;
     });
@@ -136,4 +188,11 @@ function getTanggal() {
 
 function saveToSession() {
     sessionStorage.setItem('dataTugas', JSON.stringify(dataTugas));
+}
+
+function muatData(json) {
+    const data = JSON.parse(json);
+    dataTugas = data;
+
+    updateTugas();
 }

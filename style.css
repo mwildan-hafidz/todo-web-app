@@ -36,14 +36,16 @@ header h1 {
     font-weight: bold;
 }
 
-.tbl-simpan {
+.tbl-simpan,
+.tbl-muat {
     padding: .3rem .5rem;
     border-radius: .2rem;
     color: #fff;
     border: 1px solid #fff;
 }
 
-.tbl-simpan:hover {
+.tbl-simpan:hover,
+.tbl-muat:hover {
     background-color: #fff;
     color: #333;
 }
@@ -111,13 +113,11 @@ main {
     margin-top: .5rem;
 }
 
-.tugas div {
-    display: flex;
-}
-
 .tugas .tbl-cek,
+.tugas .tbl-edit,
 .tugas .tbl-hapus,
-.tugas p {
+.tugas p,
+.tugas input {
     padding: .5rem;
     background-color: #fff;
 }
@@ -129,8 +129,15 @@ main {
 }
 
 .tugas .tbl-cek:hover {
-    background-color: #82f588;
-    /* border-color: #82f588; */
+    background-color: #44f84d;
+}
+
+.tugas .tbl-edit {
+    border-left: 1px solid black;
+}
+
+.tugas .tbl-edit:hover {
+    background-color: #ffee55;
 }
 
 .tugas .tbl-hapus {
@@ -141,11 +148,10 @@ main {
 
 .tugas .tbl-hapus:hover {
     background-color: #ff695e;
-    /* border-color: #ff695e; */
 }
 
-.tugas div,
-.tugas p {
+.tugas p,
+.tugas input {
     flex: 1;
     min-width: 0;
 }
@@ -165,10 +171,6 @@ main {
 .tugas.cek .tbl-cek:hover,
 .tugas.cek .tbl-hapus:hover{
     opacity: 1;
-}
-
-.tugas.cek .tbl-cek:hover {
-    background-color: #fffc37;
 }
 
 .tugas.cek p {

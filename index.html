@@ -11,7 +11,11 @@
 <body>
     <header>
         <h1>To do App</h1>
-        <button class="tbl-simpan">Simpan</button>
+        <div>
+            <button class="tbl-muat">Muat</button>
+            <span>/</span>
+            <button class="tbl-simpan">Simpan</button>
+        </div>
     </header>
     <main>
         <div class="papan">
@@ -43,6 +47,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Elemen tersembunyi. -->
+     
+    <input type="file" id="input-file" accept=".json" style="display: none;">
 
     <script src="script.js"></script>
 </body>
