@@ -1,6 +1,3 @@
-// To do:
-// + Tombol urutkan.
-
 let dataTugas = [];
 let tugasDipilih = null;
 
@@ -32,6 +29,41 @@ tblTambah.addEventListener('click', function () {
     
     inputTugas.value = '';
 });
+
+const tblUrutNama = document.querySelector('.tbl-urut-nama');
+const tblUrutCek = document.querySelector('.tbl-urut-cek');
+let urutNamaAsc;
+let urutCekAsc;
+
+tblUrutNama.onclick = function () {
+    switch (urutNamaAsc) {
+        case false:
+            dataTugas.sort((x, y) => y.isi.localeCompare(x.isi));
+            urutNamaAsc = true;
+            break;
+            
+        default:
+            dataTugas.sort((x, y) => x.isi.localeCompare(y.isi));
+            urutNamaAsc = false;
+            break;
+    }
+        updateTugas();
+};
+
+tblUrutCek.onclick = function () {
+    switch (urutCekAsc) {
+        case false:
+            dataTugas.sort((x, y) => Number(y.cek) - Number(x.cek));
+            urutCekAsc = true;
+            break;
+            
+        default:
+            dataTugas.sort((x, y) => Number(x.cek) - Number(y.cek));
+            urutCekAsc = false;
+            break;
+    }
+        updateTugas();
+};
 
 document.body.addEventListener('click', function (e) {
     // Tombol cek.
@@ -116,8 +148,10 @@ inputFile.addEventListener('change', function () {
             alert('File tidak valid.');
         }
     }
-    reader.readAsText(file)
-})
+    reader.readAsText(file);
+
+    this.value = '';
+});
 
 tblSimpan.addEventListener('click', function () {
     const saveJSON = JSON.stringify(dataTugas);
@@ -142,7 +176,7 @@ function updateTugas() {
         `<li class="tugas ${tugas.cek ? 'cek' : ''}" data-index="${index}">
             <button class="tbl-cek">Cek</button>
             <p>${tugas.isi}</p>
-            <input type="text" class="input-edit" style="display: none;">
+            <input type="text" class="input-edit" name="input-edit" style="display: none;">
             <button class="tbl-edit">Edit</button>
             <button class="tbl-hapus">Hapus</button>
         </li>`;

@@ -18,6 +18,10 @@
     color: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 /* Header. */
 
 header {
@@ -105,6 +109,28 @@ main {
     cursor: pointer;
 }
 
+/* Tombol urut. */
+
+.container-urut {
+    display: flex;
+    margin-top: .5rem;
+}
+
+.container-urut button {
+    padding: .5rem;
+    border-right: 1px solid black;
+}
+
+.container-urut button:hover {
+    background-color: #fff;
+}
+
+.container-urut .tbl-urut-nama {
+    flex: 1;
+    text-align: left;
+    max-width: calc(100% - 55.41px - 65.02px - 45.81px);
+}
+
 /* Tugas. */
 
 .tugas {
@@ -162,14 +188,12 @@ main {
     text-overflow: ellipsis;
 }
 
-.tugas.cek .tbl-cek,
 .tugas.cek p,
-.tugas.cek .tbl-hapus{
+.tugas.cek button {
     opacity: .5;
 }
 
-.tugas.cek .tbl-cek:hover,
-.tugas.cek .tbl-hapus:hover{
+.tugas.cek button:hover {
     opacity: 1;
 }
 
