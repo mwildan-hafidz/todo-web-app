@@ -112,7 +112,7 @@ main {
 /* Tombol urut. */
 
 .container-urut {
-    display: flex;
+    display: none;
     margin-top: .5rem;
 }
 
