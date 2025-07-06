@@ -173,8 +173,6 @@ function updateTugas() {
     resetTugas();
 
     if (dataTugas.length !== 0) {
-        console.log(1);
-        
         containerUrut.style.display = 'flex';
     }
     else {
