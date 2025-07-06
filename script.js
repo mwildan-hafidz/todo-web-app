@@ -166,29 +166,32 @@ tblSimpan.addEventListener('click', function () {
 // Functions.
 
 const containerTugas = document.querySelector('.container-tugas');
-const containerUrut = document.querySelector('.container-urut');
-
 function updateTugas() {
     saveToSession();
     resetTugas();
 
+    updateUrut();
+    
+    dataTugas.forEach(function (tugas, index) {
+        containerTugas.innerHTML += 
+        `<li class="tugas ${tugas.cek ? 'cek' : ''}" data-index="${index}">
+        <button class="tbl-cek">Cek</button>
+        <p>${tugas.isi}</p>
+        <input type="text" class="input-edit" name="input-edit" style="display: none;">
+            <button class="tbl-edit">Edit</button>
+            <button class="tbl-hapus">Hapus</button>
+        </li>`;
+    });
+}
+
+const containerUrut = document.querySelector('.container-urut');
+function updateUrut() {
     if (dataTugas.length !== 0) {
         containerUrut.style.display = 'flex';
     }
     else {
         containerUrut.style.display = 'none';
     }
-
-    dataTugas.forEach(function (tugas, index) {
-        containerTugas.innerHTML += 
-        `<li class="tugas ${tugas.cek ? 'cek' : ''}" data-index="${index}">
-            <button class="tbl-cek">Cek</button>
-            <p>${tugas.isi}</p>
-            <input type="text" class="input-edit" name="input-edit" style="display: none;">
-            <button class="tbl-edit">Edit</button>
-            <button class="tbl-hapus">Hapus</button>
-        </li>`;
-    });
 }
 
 function resetTugas() {
