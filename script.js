@@ -166,11 +166,21 @@ tblSimpan.addEventListener('click', function () {
 // Functions.
 
 const containerTugas = document.querySelector('.container-tugas');
+const containerUrut = document.querySelector('.container-urut');
 
 function updateTugas() {
     saveToSession();
     resetTugas();
-    
+
+    if (dataTugas.length !== 0) {
+        console.log(1);
+        
+        containerUrut.style.display = 'flex';
+    }
+    else {
+        containerUrut.style.display = 'none';
+    }
+
     dataTugas.forEach(function (tugas, index) {
         containerTugas.innerHTML += 
         `<li class="tugas ${tugas.cek ? 'cek' : ''}" data-index="${index}">
